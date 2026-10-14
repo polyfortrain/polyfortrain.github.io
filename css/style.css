@@ -1,0 +1,140 @@
+@charset "UTF-8";
+/* 余白や枠線を含めて、要素のサイズを計算する */
+* {
+    box-sizing: border-box;
+}
+
+/* ページ全体の背景 */
+html {
+    min-height: 100%;
+    background-color: #f3f6fb;
+}
+
+/* コンテンツを中央に配置する */
+body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+
+    font-family: "Segoe UI", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", Meiryo, sans-serif;
+
+    color: #334155;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* サイトのタイトル */
+h1 {
+    margin: 0 0 44px;
+    padding: 40px 36px;
+    border-radius: 20px;
+
+    background: linear-gradient(120deg, #17365b, #2563a6);
+    box-shadow: 0 12px 30px rgba(23, 54, 91, 0.16);
+
+    color: #ffffff;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+}
+
+/* タイトルの上に添える小さなラベル */
+h1::before {
+    content: "PORTFOLIO";
+    display: block;
+    margin-bottom: 12px;
+
+    color: #bfdbfe;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+}
+
+/* 「自己紹介」「ポートフォリオ」の見出し */
+h2 {
+    margin: 36px 0 16px;
+    padding-left: 14px;
+    border-left: 4px solid #2563a6;
+
+    color: #17365b;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+/* 本文を白いカードとして表示する */
+p {
+    margin: 0;
+    padding: 24px 28px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+
+    line-height: 2;
+}
+
+/* 作品紹介用のカード */
+.portfolio-card {
+    padding: 28px;
+    border-top: 3px solid #2563a6;
+
+    color: #17365b;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* 作品名の上に添える小さなラベル */
+.portfolio-card::before {
+    content: "PROJECT";
+    display: block;
+    margin-bottom: 8px;
+
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+}
+
+/* リンクを追加した場合の見た目 */
+a {
+    color: #1d5c9f;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+/* リンクにマウスを乗せたとき */
+a:hover {
+    color: #123b68;
+    text-decoration-thickness: 2px;
+}
+
+/* キーボードでリンクを選択したとき */
+a:focus-visible {
+    outline: 3px solid #2563a6;
+    outline-offset: 5px;
+}
+
+/* スマートフォンなど、画面が狭い場合 */
+@media (max-width: 600px) {
+    body {
+        padding: 28px 16px 48px;
+    }
+
+    h1 {
+        margin-bottom: 32px;
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    h2 {
+        margin-top: 28px;
+        font-size: 1.1rem;
+    }
+
+    p,
+    .portfolio-card {
+        padding: 20px;
+    }
+}
