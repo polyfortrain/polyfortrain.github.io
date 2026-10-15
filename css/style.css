@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* 余白や枠線を含めて、要素のサイズを計算する */
 * {
     box-sizing: border-box;
@@ -15,10 +14,8 @@ body {
     max-width: 960px;
     margin: 0 auto;
     padding: 56px 24px 80px;
-
     font-family: "Segoe UI", "Hiragino Kaku Gothic ProN",
         "Yu Gothic", Meiryo, sans-serif;
-
     color: #334155;
     line-height: 1.8;
     overflow-wrap: anywhere;
@@ -29,10 +26,8 @@ h1 {
     margin: 0 0 44px;
     padding: 40px 36px;
     border-radius: 20px;
-
     background: linear-gradient(120deg, #17365b, #2563a6);
     box-shadow: 0 12px 30px rgba(23, 54, 91, 0.16);
-
     color: #ffffff;
     font-size: clamp(1.5rem, 3.5vw, 2.1rem);
     line-height: 1.5;
@@ -44,7 +39,6 @@ h1::before {
     content: "PORTFOLIO";
     display: block;
     margin-bottom: 12px;
-
     color: #bfdbfe;
     font-size: 0.75rem;
     font-weight: 600;
@@ -56,7 +50,6 @@ h2 {
     margin: 36px 0 16px;
     padding-left: 14px;
     border-left: 4px solid #2563a6;
-
     color: #17365b;
     font-size: 1.25rem;
     line-height: 1.5;
@@ -66,12 +59,10 @@ h2 {
 p {
     margin: 0;
     padding: 24px 28px;
-
     border: 1px solid #e2e8f0;
     border-radius: 14px;
     background-color: #ffffff;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
-
     line-height: 2;
 }
 
@@ -79,7 +70,6 @@ p {
 .portfolio-card {
     padding: 28px;
     border-top: 3px solid #2563a6;
-
     color: #17365b;
     font-size: 1.15rem;
     font-weight: 700;
@@ -90,7 +80,6 @@ p {
     content: "PROJECT";
     display: block;
     margin-bottom: 8px;
-
     color: #64748b;
     font-size: 0.7rem;
     font-weight: 600;
@@ -104,13 +93,11 @@ a {
     text-underline-offset: 4px;
 }
 
-/* リンクにマウスを乗せたとき */
 a:hover {
     color: #123b68;
     text-decoration-thickness: 2px;
 }
 
-/* キーボードでリンクを選択したとき */
 a:focus-visible {
     outline: 3px solid #2563a6;
     outline-offset: 5px;
@@ -136,5 +123,129 @@ a:focus-visible {
     p,
     .portfolio-card {
         padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   JavaScript と組み合わせた演出
+   ========================================================= */
+
+/* ダークモードの切り替えボタン */
+.theme-toggle {
+    display: block;
+    margin: 0 0 18px auto;
+    padding: 10px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #17365b;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: #e8f1ff;
+    transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid #2563a6;
+    outline-offset: 3px;
+}
+
+/* タイトル上をマウスが動くと光の位置が変わる */
+h1 {
+    background:
+        radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(147, 197, 253, 0.5), transparent 42%),
+        linear-gradient(120deg, #17365b, #2563a6);
+}
+
+/* 画面内に入ると、ふわっと表示する */
+.js-enabled .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js-enabled .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 作品カードはマウスを乗せると少し浮く */
+.portfolio-card {
+    transition: box-shadow 0.25s ease, transform 0.25s ease,
+        opacity 0.7s ease;
+}
+
+.portfolio-card.is-visible:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(23, 54, 91, 0.16);
+}
+
+/* ダークモード */
+html.dark {
+    background-color: #0b1220;
+}
+
+.dark body {
+    color: #cbd5e1;
+}
+
+.dark h2 {
+    color: #bfdbfe;
+    border-left-color: #60a5fa;
+}
+
+.dark p {
+    background-color: #182337;
+    color: #e2e8f0;
+    border-color: #334155;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+}
+
+.dark .portfolio-card {
+    border-top-color: #60a5fa;
+}
+
+.dark .portfolio-card::before {
+    color: #94a3b8;
+}
+
+.dark .theme-toggle {
+    color: #e2e8f0;
+    background-color: #1e293b;
+    border-color: #475569;
+}
+
+.dark .theme-toggle:hover {
+    background-color: #334155;
+}
+
+.dark a {
+    color: #93c5fd;
+}
+
+/* アニメーションを控えたい設定の人には、動かさず表示する */
+@media (prefers-reduced-motion: reduce) {
+    .js-enabled .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .theme-toggle,
+    .portfolio-card {
+        transition: none;
+    }
+
+    .theme-toggle:hover,
+    .portfolio-card.is-visible:hover {
+        transform: none;
     }
 }
